@@ -54,6 +54,7 @@ sysinfo.txt
 # Unity
 *Packages
 /platformer_prototype/Library/PackageCache/
+/platformer_prototype/Library/Artifacts/
 *UserSettings
 
 # Builds
