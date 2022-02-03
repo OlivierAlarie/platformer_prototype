@@ -51,12 +51,6 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
-# Unity
-*Packages
-/platformer_prototype/Library/PackageCache/
-/platformer_prototype/Library/Artifacts/
-*UserSettings
-
 # Builds
 *.apk
 *.unitypackage
