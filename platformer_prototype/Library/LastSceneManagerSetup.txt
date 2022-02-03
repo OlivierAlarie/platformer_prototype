@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/GymStage.unity
+- path: Assets/Scenes/GymStage-Oli.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
