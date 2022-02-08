@@ -60,7 +60,6 @@ public class BasicPlayerController : MonoBehaviour
         if(_characterController.isGrounded)
         {
             _playerJumping = false;
-            _playerMaxSpeed = 5f;
             _playerJumpGravMult = 1f;
             if (_playerJumpLeniency > 0 || Input.GetKeyDown(KeyCode.Space))
             {
