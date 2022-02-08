@@ -8125,12 +8125,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.15
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.51, z: 0}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!114 &1626237596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8150,7 +8150,14 @@ MonoBehaviour:
   _maxDownwardAngle: 40
   _maxUpwardAngle: -60
   _characterController: {fileID: 1626237595}
-  _playerSpeed: 5
+  _playerMaxSpeed: 5
+  _playerAcceleration: 100
+  _playerJumpSpeed: 6
+  _playerJumpLeniency: 0
+  _playerJumpGravMult: 1
+  _gravity: -9.81
+  _terminalVelocityY: -53
+  _rootGeometry: {fileID: 1548839308}
 --- !u!1 &1658323724
 GameObject:
   m_ObjectHideFlags: 0
