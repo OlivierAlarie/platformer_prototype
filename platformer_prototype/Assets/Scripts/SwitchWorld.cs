@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchWorld : MonoBehaviour
 {
@@ -13,10 +14,20 @@ public class SwitchWorld : MonoBehaviour
 
     [SerializeField] public Light mainLight;
 
+    //TIMER IN DARK WORLD
+    [SerializeField] public Image _timerBar;
+    [SerializeField] public float maxTime = 10f;
+    [SerializeField] public float refreshRate = 2.0f;
+
+    [Header("PAS TOUCHE")]
+    [SerializeField] public float _timeLeft;
+
+
     void Awake()
     {
         _isInNormalWorld = true;
         _isInDarkWorld = false;
+        _timeLeft = maxTime;
     }
 
     // Update is called once per frame
@@ -32,9 +43,18 @@ public class SwitchWorld : MonoBehaviour
             }
         if (_isInDarkWorld) {
             DarkWorld();
+            if (_timeLeft > 0) {
+                _timeLeft -= Time.deltaTime;
+                _timerBar.fillAmount = _timeLeft / maxTime;
+            }
         }
         if (_isInNormalWorld) {
             NormalWorld();
+            if (_timeLeft < maxTime) {
+                _timeLeft += refreshRate * Time.deltaTime;
+                _timerBar.fillAmount = _timeLeft / maxTime;
+            }
+            
         }
     }
 
