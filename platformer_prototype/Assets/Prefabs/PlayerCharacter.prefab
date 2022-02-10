@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5747843990905824862}
   - component: {fileID: 5747843990905824863}
   - component: {fileID: 5747843990905824856}
+  - component: {fileID: 2132690354}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +80,27 @@ MonoBehaviour:
   _gravity: -9.81
   _terminalVelocityY: -53
   _rootGeometry: {fileID: 5747843991788922184}
+--- !u!114 &2132690354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747843990905824849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9065f1ee9d52f4a9323f8c88a5729a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isInNormalWorld: 1
+  _isInDarkWorld: 0
+  DarkWorldStuff: {fileID: 0}
+  NormalWorldStuff: {fileID: 0}
+  mainLight: {fileID: 0}
+  _timerBar: {fileID: 0}
+  maxTime: 10
+  refreshRate: 0.5
+  _timeLeft: 0
 --- !u!1 &5747843990961975817
 GameObject:
   m_ObjectHideFlags: 0

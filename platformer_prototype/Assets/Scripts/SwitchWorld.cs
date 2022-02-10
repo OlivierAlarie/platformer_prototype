@@ -47,6 +47,10 @@ public class SwitchWorld : MonoBehaviour
                 _timeLeft -= Time.deltaTime;
                 _timerBar.fillAmount = _timeLeft / maxTime;
             }
+            if (_timeLeft <= 0) {
+                _isInNormalWorld = true;
+                _isInDarkWorld = false;
+            }
         }
         if (_isInNormalWorld) {
             NormalWorld();
@@ -62,6 +66,7 @@ public class SwitchWorld : MonoBehaviour
         DarkWorldStuff.SetActive(true);
         NormalWorldStuff.SetActive(false);
         mainLight.color = Color.black;
+        //put on top of hierachy and deparent and then reactivate
     }
     private void NormalWorld() {
         NormalWorldStuff.SetActive(true);
