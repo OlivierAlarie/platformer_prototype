@@ -41,6 +41,8 @@ public class BasicPlayerController : MonoBehaviour
     void Start()
     {
         _mainCamera.transform.LookAt(_cameraRoot);
+        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
