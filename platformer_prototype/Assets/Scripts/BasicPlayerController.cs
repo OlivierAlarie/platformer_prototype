@@ -20,36 +20,28 @@ public class BasicPlayerController : MonoBehaviour
 
     [Header("Character")]
     public CharacterController _characterController;
-    public float _playerMaxSpeed = 5f;
-    public float _playerJumpSpeed = 5f;
-    public float _playerJumpLeniency = 0f;
-    public float _playerJumpGravMult = 1f;
+    public float _playerMaxSpeed = 5f; //Target speed for the character
+    public float _playerAcceleration = 1f; //Rate at which the character reaches horizontal _playerMaxSpeed, rate per second ? 
+    public float _playerDecceleration = 1f; //Rate at which the character reaches horizontal 0, rate per second ?
+    public float _playerJumpHeight = 1f; //Target height for the character
+    public float _playerJumpLeniency = 0f; // Seconds of leniency where a jump attempt is registered before reaching the ground
     public float _gravity = -9.81f;
     public float _terminalVelocityY = -53f;
     public Transform _rootGeometry;
+
 
     private Vector3 _targetDirection = Vector3.zero;
     private float _targetVelocityY = 0f;
     private bool _playerJumping = false;
 
-    private int _timeout = 60;
-
-    private enum PlayerStates 
-    {
-        Idle,
-        Walk,
-        Jump
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _mainCamera.transform.LookAt(_cameraRoot);
         Cursor.lockState = CursorLockMode.Locked;
+        _mainCamera.transform.LookAt(_cameraRoot);
         _originalCameraLocalPosition = _mainCamera.transform.localPosition;
         _maxCameraDistance = Vector3.Distance(_cameraRoot.transform.position, _mainCamera.transform.position);
-        Debug.Log("Max Camera Distance : " + _maxCameraDistance);
-        Debug.Log("Original Camera Local Position : " + _originalCameraLocalPosition);
     }
 
     // Update is called once per frame
@@ -69,23 +61,18 @@ public class BasicPlayerController : MonoBehaviour
         if(_characterController.isGrounded)
         {
             _playerJumping = false;
-            _playerJumpGravMult = 1f;
             if (_playerJumpLeniency > 0 || Input.GetKeyDown(KeyCode.Space))
             {
-                _targetVelocityY = _playerJumpSpeed;
+                _targetVelocityY = Mathf.Sqrt(_playerJumpHeight * -2f * _gravity);
                 _playerJumping = true;
             }
         }
         else
         {
-
-            if (Input.GetKeyUp(KeyCode.Space) && _playerJumping || _targetVelocityY <= 0)
+            //Early jump stop
+            if(Input.GetKeyUp(KeyCode.Space) && _playerJumping && _targetVelocityY > 0)
             {
-                _playerJumpGravMult = 2f;
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-
+                _targetVelocityY *= 0.5f;
             }
         }
     }
@@ -120,7 +107,7 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (!_characterController.isGrounded)
         {
-            _targetVelocityY += _gravity * _playerJumpGravMult * Time.deltaTime;
+            _targetVelocityY += _gravity * Time.deltaTime;
             if (_targetVelocityY < _terminalVelocityY)
             {
                 _targetVelocityY = _terminalVelocityY;
@@ -135,6 +122,10 @@ public class BasicPlayerController : MonoBehaviour
         //assign targetDirection to Geometry ?
         _rootGeometry.transform.LookAt(_characterController.transform.position + _targetDirection);
 
+
+        //Ramp Up horizontal Speed
+
+        //float targetSpeed = _characterController.velocity;
 
         _targetDirection *= _playerMaxSpeed;
         _targetDirection.y = _targetVelocityY;

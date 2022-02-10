@@ -9387,6 +9387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: _playerJumpHeight
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_RootOrder
       value: 1
