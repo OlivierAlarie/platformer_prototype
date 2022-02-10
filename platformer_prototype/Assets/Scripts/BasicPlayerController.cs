@@ -15,6 +15,8 @@ public class BasicPlayerController : MonoBehaviour
 
     private float _targetRotationH = 0;
     private float _targetRotationV = 0;
+    private float _maxCameraDistance;
+    private Vector3 _originalCameraLocalPosition;
 
     [Header("Character")]
     public CharacterController _characterController;
@@ -30,6 +32,8 @@ public class BasicPlayerController : MonoBehaviour
     private float _targetVelocityY = 0f;
     private bool _playerJumping = false;
 
+    private int _timeout = 60;
+
     private enum PlayerStates 
     {
         Idle,
@@ -42,7 +46,10 @@ public class BasicPlayerController : MonoBehaviour
     {
         _mainCamera.transform.LookAt(_cameraRoot);
         Cursor.lockState = CursorLockMode.Locked;
-        
+        _originalCameraLocalPosition = _mainCamera.transform.localPosition;
+        _maxCameraDistance = Vector3.Distance(_cameraRoot.transform.position, _mainCamera.transform.position);
+        Debug.Log("Max Camera Distance : " + _maxCameraDistance);
+        Debug.Log("Original Camera Local Position : " + _originalCameraLocalPosition);
     }
 
     // Update is called once per frame
@@ -94,6 +101,19 @@ public class BasicPlayerController : MonoBehaviour
         _targetRotationV = Mathf.Clamp(_targetRotationV, _maxUpwardAngle, _maxDownwardAngle);
 
         _cameraRoot.transform.rotation = Quaternion.Euler(_targetRotationV, _targetRotationH, 0.0f);
+        //Check for Environement Collision
+
+        RaycastHit hit;
+        Vector3 dir = _mainCamera.transform.position - _cameraRoot.transform.position;
+        bool collided = Physics.Raycast(_cameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance);
+        if (collided)
+        {
+            _mainCamera.transform.localPosition = _cameraRoot.transform.InverseTransformPoint(hit.point);
+        }
+        else
+        {
+            _mainCamera.transform.localPosition = _originalCameraLocalPosition;
+        }
     }
 
     void GravityCheck()
