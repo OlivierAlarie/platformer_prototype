@@ -6,12 +6,12 @@ using UnityEngine;
 public class BasicPlayerController : MonoBehaviour
 {
     [Header("Camera")]
-    public Camera _mainCamera;
-    public Transform _cameraRoot;
-    public float _cameraSensitivityX = 360;
-    public float _cameraSensitivityY = 360;
-    public float _maxDownwardAngle = 20;
-    public float _maxUpwardAngle = -60;
+    public Camera MainCamera;
+    public Transform CameraRoot;
+    public float CameraSensitivityX = 360;
+    public float CameraSensitivityY = 360;
+    public float MaxDownwardAngle = 20;
+    public float MaxUpwardAngle = -60;
 
     private float _targetRotationH = 0;
     private float _targetRotationV = 0;
@@ -20,28 +20,27 @@ public class BasicPlayerController : MonoBehaviour
 
     [Header("Character")]
     public CharacterController _characterController;
-    public float _playerMaxSpeed = 5f; //Target speed for the character
-    public float _playerAcceleration = 1f; //Rate at which the character reaches horizontal _playerMaxSpeed, rate per second ? 
-    public float _playerDecceleration = 1f; //Rate at which the character reaches horizontal 0, rate per second ?
-    public float _playerJumpHeight = 1f; //Target height for the character
-    public float _playerJumpLeniency = 0f; // Seconds of leniency where a jump attempt is registered before reaching the ground
-    public float _gravity = -9.81f;
-    public float _terminalVelocityY = -53f;
-    public Transform _rootGeometry;
+    public float MaxSpeed = 5f; //Target speed for the character
+    public float JumpHeight = 1f; //Target height for the character
+    public float JumpLeniency = 0.15f; // Seconds of leniency where a jump attempt is registered before reaching the ground
+    public float Gravity = -9.81f;
 
+    [Header("Model")]
+    public Transform RootGeometry;
 
     private Vector3 _targetDirection = Vector3.zero;
     private float _targetVelocityY = 0f;
+    private float _terminalVelocityY = -53f;
     private bool _playerJumping = false;
-
+    private float _playerJumpTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _mainCamera.transform.LookAt(_cameraRoot);
-        _originalCameraLocalPosition = _mainCamera.transform.localPosition;
-        _maxCameraDistance = Vector3.Distance(_cameraRoot.transform.position, _mainCamera.transform.position);
+        MainCamera.transform.LookAt(CameraRoot);
+        _originalCameraLocalPosition = MainCamera.transform.localPosition;
+        _maxCameraDistance = Vector3.Distance(CameraRoot.transform.position, MainCamera.transform.position);
     }
 
     // Update is called once per frame
@@ -56,16 +55,18 @@ public class BasicPlayerController : MonoBehaviour
     void InputsCheck()
     {
         //Horizontal Movement
-        _targetDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
+        _targetDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         //Vertical Movement
         if(_characterController.isGrounded)
         {
+            
             _playerJumping = false;
-            if (_playerJumpLeniency > 0 || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || _playerJumpTimer > 0)
             {
-                _targetVelocityY = Mathf.Sqrt(_playerJumpHeight * -2f * _gravity);
+                _targetVelocityY = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 _playerJumping = true;
             }
+            _playerJumpTimer = 0;
         }
         else
         {
@@ -74,6 +75,13 @@ public class BasicPlayerController : MonoBehaviour
             {
                 _targetVelocityY *= 0.5f;
             }
+
+            //Jump Leniency
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _playerJumpTimer = JumpLeniency;
+            }
+            _playerJumpTimer -= Time.deltaTime;
         }
     }
 
@@ -81,25 +89,25 @@ public class BasicPlayerController : MonoBehaviour
     {
         //Calculate Camera Rotation based of mouse movement
 
-        _targetRotationH += Input.GetAxis("Mouse X") * _cameraSensitivityX * Time.deltaTime;
-        _targetRotationV += Input.GetAxis("Mouse Y") * _cameraSensitivityY * Time.deltaTime;
+        _targetRotationH += Input.GetAxis("Mouse X") * CameraSensitivityX * Time.deltaTime;
+        _targetRotationV += Input.GetAxis("Mouse Y") * CameraSensitivityY * Time.deltaTime;
 
         //Clamp Vertical Rotation
-        _targetRotationV = Mathf.Clamp(_targetRotationV, _maxUpwardAngle, _maxDownwardAngle);
+        _targetRotationV = Mathf.Clamp(_targetRotationV, MaxUpwardAngle, MaxDownwardAngle);
 
-        _cameraRoot.transform.rotation = Quaternion.Euler(_targetRotationV, _targetRotationH, 0.0f);
+        CameraRoot.transform.rotation = Quaternion.Euler(_targetRotationV, _targetRotationH, 0.0f);
         //Check for Environement Collision
 
         RaycastHit hit;
-        Vector3 dir = _mainCamera.transform.position - _cameraRoot.transform.position;
-        bool collided = Physics.Raycast(_cameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance);
+        Vector3 dir = MainCamera.transform.position - CameraRoot.transform.position;
+        bool collided = Physics.Raycast(CameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance);
         if (collided)
         {
-            _mainCamera.transform.localPosition = _cameraRoot.transform.InverseTransformPoint(hit.point);
+            MainCamera.transform.localPosition = CameraRoot.transform.InverseTransformPoint(hit.point);
         }
         else
         {
-            _mainCamera.transform.localPosition = _originalCameraLocalPosition;
+            MainCamera.transform.localPosition = _originalCameraLocalPosition;
         }
     }
 
@@ -107,7 +115,7 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (!_characterController.isGrounded)
         {
-            _targetVelocityY += _gravity * Time.deltaTime;
+            _targetVelocityY += Gravity * Time.deltaTime;
             if (_targetVelocityY < _terminalVelocityY)
             {
                 _targetVelocityY = _terminalVelocityY;
@@ -117,17 +125,12 @@ public class BasicPlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        //Use _cameraRoots rotation, making forward always in front of the camera
-        _targetDirection = Quaternion.Euler(0.0f, _cameraRoot.rotation.eulerAngles.y, 0.0f) * _targetDirection;
+        //Use CameraRoots rotation, making forward always in front of the camera
+        _targetDirection = Quaternion.Euler(0.0f, CameraRoot.rotation.eulerAngles.y, 0.0f) * _targetDirection;
         //assign targetDirection to Geometry ?
-        _rootGeometry.transform.LookAt(_characterController.transform.position + _targetDirection);
+        RootGeometry.transform.LookAt(_characterController.transform.position + _targetDirection);
 
-
-        //Ramp Up horizontal Speed
-
-        //float targetSpeed = _characterController.velocity;
-
-        _targetDirection *= _playerMaxSpeed;
+        _targetDirection *= MaxSpeed;
         _targetDirection.y = _targetVelocityY;
 
         _characterController.Move(_targetDirection * Time.deltaTime);

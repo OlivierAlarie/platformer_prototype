@@ -66,20 +66,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac838d8b5f31ec741b819d079c439e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 5747843991876522309}
-  _cameraRoot: {fileID: 5747843990961975818}
-  _cameraSensitivityX: 360
-  _cameraSensitivityY: 360
-  _maxDownwardAngle: 40
-  _maxUpwardAngle: -60
+  MainCamera: {fileID: 5747843991876522309}
+  CameraRoot: {fileID: 5747843990961975818}
+  CameraSensitivityX: 360
+  CameraSensitivityY: 360
+  MaxDownwardAngle: 20
+  MaxUpwardAngle: -60
   _characterController: {fileID: 5747843990905824863}
-  _playerMaxSpeed: 5
-  _playerJumpSpeed: 6
-  _playerJumpLeniency: 0
-  _playerJumpGravMult: 1
-  _gravity: -9.81
-  _terminalVelocityY: -53
-  _rootGeometry: {fileID: 5747843991788922184}
+  MaxSpeed: 5
+  JumpHeight: 1
+  JumpLeniency: 0
+  Gravity: -9.81
+  RootGeometry: {fileID: 5747843991788922184}
 --- !u!114 &2132690354
 MonoBehaviour:
   m_ObjectHideFlags: 0
