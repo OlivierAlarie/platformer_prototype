@@ -135,7 +135,7 @@ public class BasicPlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector3 newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
         if(newDirection == Vector3.zero)
         {
