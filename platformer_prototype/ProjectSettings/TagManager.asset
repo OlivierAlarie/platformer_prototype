@@ -7,6 +7,8 @@ TagManager:
   - Normal_World
   - Dark_World
   - Wraith
+  - Key
+  - SpecialKey
   layers:
   - Default
   - TransparentFX

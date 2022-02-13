@@ -20,6 +20,7 @@ public class BasicPlayerController : MonoBehaviour
 
     [Header("Character")]
     public CharacterController _characterController;
+    public float MaxDashSpeed = 10f;
     public float MaxSpeed = 5f; //Target speed for the character
     public float TimeToMaxSpeed = 1f;//Time to reach max speed (in Seconds)
     public float JumpHeight = 1f; //Target height for the character
@@ -33,10 +34,12 @@ public class BasicPlayerController : MonoBehaviour
     private float _targetVelocityXZ = 0f;
     private float _targetVelocityChangeRate = 0f;
     private float _targetVelocityY = 0f;
+    private float _targetSpeed = 0f;
     private float _terminalVelocityY = -53f;
     private bool _playerJumping = false;
     private float _playerJumpTimer = 0f;
     private float _playerCoyoteTimer = 0f;
+    
 
     
 
@@ -137,9 +140,15 @@ public class BasicPlayerController : MonoBehaviour
     {
         Vector3 newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
+        if (_characterController.isGrounded)
+        {
+            _targetSpeed = Input.GetButton("Dash") ? MaxDashSpeed : MaxSpeed;
+        }
+        
+
         if(newDirection == Vector3.zero)
         {
-            _targetVelocityXZ -= MaxSpeed * _targetVelocityChangeRate * Time.deltaTime; //10 * 1 * 0.5
+            _targetVelocityXZ -= _targetSpeed * _targetVelocityChangeRate * Time.deltaTime; //10 * 1 * 0.5
             if (_targetVelocityXZ < 0)
             {
                 _targetVelocityXZ = 0;
@@ -147,10 +156,10 @@ public class BasicPlayerController : MonoBehaviour
         }
         else
         {
-            _targetVelocityXZ += MaxSpeed * _targetVelocityChangeRate * Time.deltaTime;
-            if(_targetVelocityXZ > MaxSpeed)
+            _targetVelocityXZ += _targetSpeed * _targetVelocityChangeRate * Time.deltaTime;
+            if(_targetVelocityXZ > _targetSpeed)
             {
-                _targetVelocityXZ = MaxSpeed;
+                _targetVelocityXZ = _targetSpeed;
             }
             //Use CameraRoots rotation, making forward always in front of the camera
             _targetDirection = Quaternion.Euler(0.0f, CameraRoot.rotation.eulerAngles.y, 0.0f) * newDirection;
