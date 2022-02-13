@@ -62,9 +62,8 @@ public class BasicPlayerController : MonoBehaviour
     void CameraCheck()
     {
         //Calculate Camera Rotation based of mouse movement
-
-        _targetRotationH += Input.GetAxis("Mouse X") * CameraSensitivityX * Time.deltaTime;
-        _targetRotationV += Input.GetAxis("Mouse Y") * CameraSensitivityY * Time.deltaTime;
+        _targetRotationH += Input.GetAxis("Camera X") * CameraSensitivityX * Time.deltaTime;
+        _targetRotationV += Input.GetAxis("Camera Y") * CameraSensitivityY * Time.deltaTime;
 
         //Clamp Vertical Rotation
         _targetRotationV = Mathf.Clamp(_targetRotationV, MaxUpwardAngle, MaxDownwardAngle);
@@ -91,7 +90,7 @@ public class BasicPlayerController : MonoBehaviour
         {
             _targetVelocityY = 0;
             _playerJumping = false;
-            if (Input.GetKeyDown(KeyCode.Space) || _playerJumpTimer > 0)
+            if (Input.GetButtonDown("Jump") || _playerJumpTimer > 0)
             {
                 _targetVelocityY = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 _playerJumping = true;
@@ -103,13 +102,13 @@ public class BasicPlayerController : MonoBehaviour
         {
             //Coyote Time
             //Early jump stop
-            if (Input.GetKeyUp(KeyCode.Space) && _playerJumping && _targetVelocityY > 0)
+            if (Input.GetButtonUp("Jump") && _playerJumping && _targetVelocityY > 0)
             {
                 _targetVelocityY *= 0.5f;
             }
 
             //Jump Leniency
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Jump"))
             {
                 if (_playerCoyoteTimer > 0)
                 {

@@ -33,11 +33,11 @@ public class SwitchWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _isInNormalWorld) {
+        if (Input.GetButtonDown("SwitchWorld") && _isInNormalWorld) {
             _isInDarkWorld = true;
             _isInNormalWorld = false;
             }
-        else if (Input.GetKeyDown(KeyCode.Q) && _isInDarkWorld) {
+        else if (Input.GetButtonDown("SwitchWorld") && _isInDarkWorld) {
             _isInNormalWorld = true;
             _isInDarkWorld = false;
             }
