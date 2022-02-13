@@ -62,6 +62,8 @@ public class BasicPlayerController : MonoBehaviour
     void CameraCheck()
     {
         //Calculate Camera Rotation based of mouse movement
+        Debug.Log("" + Input.GetAxis("Camera X"));
+        Debug.Log("" + Input.GetAxis("Camera Y"));
         _targetRotationH += Input.GetAxis("Camera X") * CameraSensitivityX * Time.deltaTime;
         _targetRotationV += Input.GetAxis("Camera Y") * CameraSensitivityY * Time.deltaTime;
 

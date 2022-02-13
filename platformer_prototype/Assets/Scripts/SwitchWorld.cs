@@ -51,6 +51,7 @@ public class SwitchWorld : MonoBehaviour
                 _isInNormalWorld = true;
                 _isInDarkWorld = false;
             }
+            _timerBar.enabled = true;
         }
         if (_isInNormalWorld) {
             NormalWorld();
@@ -58,7 +59,15 @@ public class SwitchWorld : MonoBehaviour
                 _timeLeft += refreshRate * Time.deltaTime;
                 _timerBar.fillAmount = _timeLeft / maxTime;
             }
-            
+            if (_timeLeft >= maxTime)
+            {
+                _timerBar.enabled = false;
+            }
+            else
+            {
+                _timerBar.enabled = true;
+            }
+
         }
     }
 
