@@ -74,7 +74,7 @@ public class BasicPlayerController : MonoBehaviour
         RaycastHit hit;
         Vector3 dir = MainCamera.transform.position - CameraRoot.transform.position;
         bool collided = Physics.Raycast(CameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance);
-        if (collided)
+        if (collided && hit.collider.name != "PlayerCharacter")
         {
             MainCamera.transform.localPosition = CameraRoot.transform.InverseTransformPoint(hit.point);
         }
