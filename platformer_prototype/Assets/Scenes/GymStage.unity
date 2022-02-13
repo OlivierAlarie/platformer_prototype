@@ -1599,8 +1599,16 @@ PrefabInstance:
       value: PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: Gravity
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: MaxSpeed
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: JumpHeight
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: SpeedChange
@@ -1613,6 +1621,14 @@ PrefabInstance:
     - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: TimeToMaxSpeed
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: CameraSensitivityX
+      value: 290
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: CameraSensitivityY
+      value: 290
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_RootOrder
