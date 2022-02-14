@@ -5,8 +5,8 @@ using UnityEngine;
 public class KeyTracker : MonoBehaviour
 {
     [SerializeField] private bool _hasHalfKey = false;
-    [SerializeField] private bool _hasFullKey = false;
-    [SerializeField] private bool _hasSpecialKey = false;
+    [SerializeField] public bool _hasFullKey = false;
+    [SerializeField] public bool _hasSpecialKey = false;
     [SerializeField] private int _numberOfKeys = 0;
 
     private void OnTriggerEnter(Collider other) {
