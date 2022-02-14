@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5747843990905824863}
   - component: {fileID: 5747843990905824856}
   - component: {fileID: 2132690354}
+  - component: {fileID: 2132690355}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -68,15 +69,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 5747843991876522309}
   CameraRoot: {fileID: 5747843990961975818}
-  CameraSensitivityX: 360
-  CameraSensitivityY: 360
+  CameraSensitivityX: 350
+  CameraSensitivityY: 350
   MaxDownwardAngle: 20
   MaxUpwardAngle: -60
   _characterController: {fileID: 5747843990905824863}
-  MaxSpeed: 5
-  JumpHeight: 1
-  JumpLeniency: 0
-  Gravity: -9.81
+  MaxDashSpeed: 10
+  MaxSpeed: 6
+  TimeToMaxSpeed: 0.25
+  JumpHeight: 2
+  JumpLeniency: 0.15
+  Gravity: -25
   RootGeometry: {fileID: 5747843991788922184}
 --- !u!114 &2132690354
 MonoBehaviour:
@@ -99,6 +102,22 @@ MonoBehaviour:
   maxTime: 10
   refreshRate: 0.5
   _timeLeft: 0
+--- !u!114 &2132690355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747843990905824849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad95650ea27870540be4f6d369d57059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasHalfKey: 0
+  _hasFullKey: 0
+  _hasSpecialKey: 0
+  _numberOfKeys: 0
 --- !u!1 &5747843990961975817
 GameObject:
   m_ObjectHideFlags: 0

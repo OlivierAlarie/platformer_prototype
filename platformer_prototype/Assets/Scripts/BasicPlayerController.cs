@@ -39,9 +39,9 @@ public class BasicPlayerController : MonoBehaviour
     private bool _playerJumping = false;
     private float _playerJumpTimer = 0f;
     private float _playerCoyoteTimer = 0f;
-    
 
-    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -144,9 +144,9 @@ public class BasicPlayerController : MonoBehaviour
         {
             _targetSpeed = Input.GetButton("Dash") ? MaxDashSpeed : MaxSpeed;
         }
-        
 
-        if(newDirection == Vector3.zero)
+
+        if (newDirection == Vector3.zero)
         {
             _targetVelocityXZ -= _targetSpeed * _targetVelocityChangeRate * Time.deltaTime; //10 * 1 * 0.5
             if (_targetVelocityXZ < 0)
@@ -157,7 +157,7 @@ public class BasicPlayerController : MonoBehaviour
         else
         {
             _targetVelocityXZ += _targetSpeed * _targetVelocityChangeRate * Time.deltaTime;
-            if(_targetVelocityXZ > _targetSpeed)
+            if (_targetVelocityXZ > _targetSpeed)
             {
                 _targetVelocityXZ = _targetSpeed;
             }
@@ -174,5 +174,20 @@ public class BasicPlayerController : MonoBehaviour
         _targetDirection.y = _targetVelocityY;
 
         _characterController.Move(_targetDirection * Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject _gameObject = other.gameObject;
+
+        switch (_gameObject.tag)
+        {
+            case "MovingPlatform":
+                transform.parent = other.transform;
+                break;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        transform.parent = null;
     }
 }

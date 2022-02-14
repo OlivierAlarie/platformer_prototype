@@ -9,6 +9,7 @@ TagManager:
   - Wraith
   - Key
   - SpecialKey
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
