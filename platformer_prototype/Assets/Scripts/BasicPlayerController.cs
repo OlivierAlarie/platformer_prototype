@@ -26,6 +26,8 @@ public class BasicPlayerController : MonoBehaviour
     public float JumpHeight = 1f; //Target height for the character
     public float JumpLeniency = 0.15f; // Seconds of leniency where a jump attempt is registered before reaching the ground / after leaving the ground without jumping
     public float Gravity = -9.81f;
+    public float MaxFallHeight = 25; //If the character falls MaxFallHeight units on the y axis between 2 grounded checks, he dies
+    public Transform LastCheckpoint; 
 
     [Header("Model")]
     public Transform RootGeometry;
@@ -39,7 +41,8 @@ public class BasicPlayerController : MonoBehaviour
     private bool _playerJumping = false;
     private float _playerJumpTimer = 0f;
     private float _playerCoyoteTimer = 0f;
-
+    private float _lastHeight = 0f;
+    
 
 
 
@@ -65,8 +68,6 @@ public class BasicPlayerController : MonoBehaviour
     void CameraCheck()
     {
         //Calculate Camera Rotation based of mouse movement
-        Debug.Log("" + Input.GetAxis("Camera X"));
-        Debug.Log("" + Input.GetAxis("Camera Y"));
         _targetRotationH += Input.GetAxis("Camera X") * CameraSensitivityX * Time.deltaTime;
         _targetRotationV += Input.GetAxis("Camera Y") * CameraSensitivityY * Time.deltaTime;
 
@@ -100,11 +101,13 @@ public class BasicPlayerController : MonoBehaviour
                 _targetVelocityY = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 _playerJumping = true;
             }
+            _lastHeight = transform.position.y;
             _playerJumpTimer = 0;
             _playerCoyoteTimer = JumpLeniency;
         }
         else
         {
+
             //Coyote Time
             //Early jump stop
             if (Input.GetButtonUp("Jump") && _playerJumping && _targetVelocityY > 0)
@@ -132,6 +135,11 @@ public class BasicPlayerController : MonoBehaviour
             if (_targetVelocityY < _terminalVelocityY)
             {
                 _targetVelocityY = _terminalVelocityY;
+            }
+            if(_lastHeight - transform.position.y > MaxFallHeight)
+            {
+                Debug.Log("Dead");
+                //CallRespawn Method ?
             }
         }
     }
