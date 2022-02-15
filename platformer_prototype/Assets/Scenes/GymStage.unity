@@ -1830,17 +1830,21 @@ PrefabInstance:
       propertyPath: CameraSensitivityY
       value: 350
       objectReference: {fileID: 0}
+    - target: {fileID: 5747843990905824856, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: _characterAnimator
+      value: 
+      objectReference: {fileID: 1628904492}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.32
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 5747843990905824862, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8523,6 +8527,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1628904492 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4477400248509526342, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+  m_PrefabInstance: {fileID: 250222823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1629199090
 GameObject:
   m_ObjectHideFlags: 0

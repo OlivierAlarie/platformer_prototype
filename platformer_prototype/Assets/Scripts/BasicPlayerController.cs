@@ -19,6 +19,7 @@ public class BasicPlayerController : MonoBehaviour
     private Vector3 _originalCameraLocalPosition;
 
     [Header("Character")]
+    public Animator _characterAnimator;
     public CharacterController _characterController;
     public float MaxDashSpeed = 10f;
     public float MaxSpeed = 5f; //Target speed for the character
@@ -63,6 +64,7 @@ public class BasicPlayerController : MonoBehaviour
         CameraCheck();
         JumpAndGravityCheck();
         MovePlayer();
+        AnimatePlayer();
     }
 
     void CameraCheck()
@@ -182,6 +184,44 @@ public class BasicPlayerController : MonoBehaviour
         _targetDirection.y = _targetVelocityY;
 
         _characterController.Move(_targetDirection * Time.deltaTime);
+
+    }
+
+    private void AnimatePlayer()
+    {
+        if (_characterController.isGrounded)
+        {
+            _characterAnimator.SetBool("isJumping", false);
+            if (_targetVelocityXZ <= 0)
+            {
+                _characterAnimator.SetBool("isJogging", false);
+                _characterAnimator.SetBool("isRunning", false);
+            }
+            else if (_targetVelocityXZ <= MaxSpeed)
+            {
+                _characterAnimator.SetBool("isJogging", true);
+                _characterAnimator.SetBool("isRunning", false);
+            }
+            else if (_targetVelocityXZ <= MaxDashSpeed)
+            {
+                _characterAnimator.SetBool("isRunning", true);
+            }
+        }
+
+        if (_targetVelocityY > 0)
+        {
+            _characterAnimator.SetBool("isJumping", true);
+        }
+
+        if(_targetVelocityY <= -1)
+        {
+            _characterAnimator.SetBool("isFalling", true);
+        }
+        else
+        {
+            _characterAnimator.SetBool("isFalling", false);
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
