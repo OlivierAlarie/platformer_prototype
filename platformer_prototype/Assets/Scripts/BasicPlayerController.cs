@@ -43,8 +43,8 @@ public class BasicPlayerController : MonoBehaviour
     private float _playerJumpTimer = 0f;
     private float _playerCoyoteTimer = 0f;
     private float _lastHeight = 0f;
-    
 
+    private float _knockBackCounter = 0f;
 
 
     // Start is called before the first frame update
@@ -148,12 +148,21 @@ public class BasicPlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector3 newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-
-        if (_characterController.isGrounded)
+        Vector3 newDirection = Vector3.zero;
+        if (_knockBackCounter <= 0)
         {
-            _targetSpeed = Input.GetButton("Dash") ? MaxDashSpeed : MaxSpeed;
+            newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+
+            if (_characterController.isGrounded)
+            {
+                _targetSpeed = Input.GetButton("Dash") ? MaxDashSpeed : MaxSpeed;
+            }
         }
+        else
+        {
+            _knockBackCounter -= Time.deltaTime;
+        }
+       
 
 
         if (newDirection == Vector3.zero)
@@ -182,7 +191,7 @@ public class BasicPlayerController : MonoBehaviour
         //Multiply by whatever currentVelocity we target
         _targetDirection *= _targetVelocityXZ;
         _targetDirection.y = _targetVelocityY;
-
+        
         _characterController.Move(_targetDirection * Time.deltaTime);
 
     }
@@ -223,6 +232,25 @@ public class BasicPlayerController : MonoBehaviour
         }
 
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.name == "PhysicCube")
+        {
+            KnockBack(hit.normal);
+        }
+    }
+
+    public void KnockBack(Vector3 knockBackDirection)
+    {
+        if(_knockBackCounter <= 0)
+        {
+            _targetDirection = knockBackDirection;
+            _knockBackCounter = 0.5f;
+            _targetVelocityXZ = 10f;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         GameObject _gameObject = other.gameObject;
