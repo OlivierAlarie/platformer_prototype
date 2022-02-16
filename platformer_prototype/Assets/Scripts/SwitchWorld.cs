@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class SwitchWorld : MonoBehaviour
 {
     //[SerializeField] private bool _isSwitchingWorld = true;
-    [SerializeField] private bool _isInNormalWorld;
-    [SerializeField] private bool _isInDarkWorld;
+    [SerializeField] public bool _isInNormalWorld;
+    [SerializeField] public bool _isInDarkWorld;
 
     [SerializeField] public GameObject DarkWorldStuff;
     [SerializeField] public GameObject NormalWorldStuff;

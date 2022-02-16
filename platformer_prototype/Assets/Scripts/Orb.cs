@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Orb : MonoBehaviour
 {
-    [SerializeField] private float addTimeValue = 2f;
+    [SerializeField] private float _addTimeValue = 2f;
+    public SwitchWorld _switchWorld;
 
-    [SerializeField] private SwitchWorld _switchWorld;
+    private void Awake() {
+        if (_switchWorld == null) {
+            _switchWorld = GameObject.FindWithTag("Player").GetComponent<SwitchWorld>();
+        } else {
+            Debug.Log("orb is null");
+        }
+    }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
-            _switchWorld._timeLeft += addTimeValue;
+            _switchWorld._timeLeft += _addTimeValue;
             Destroy(this.gameObject);
         }
     }
