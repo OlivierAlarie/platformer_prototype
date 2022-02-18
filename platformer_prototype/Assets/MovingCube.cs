@@ -15,14 +15,15 @@ public class MovingCube : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position+ Vector3.back * Time.fixedDeltaTime);
+        rb.velocity = Vector3.back;
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "PlayerCharacter")
+
+        if (collision.gameObject.name == "PlayerCharacter")
         {
+            Debug.Log("Collided");
             bpc.KnockBack(-1*collision.GetContact(0).normal);
         }
     }
