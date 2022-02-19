@@ -141,7 +141,6 @@ public class BasicPlayerController : MonoBehaviour
             if(_lastHeight - transform.position.y > MaxFallHeight)
             {
                 Debug.Log("Dead");
-                //CallRespawn Method ?
             }
         }
     }
