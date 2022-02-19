@@ -13,13 +13,13 @@ public class ChestOpenSequence : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player" && keyTracker._numberOfKeys == numberOfKeysNeeded && !keyTracker._hasSpecialKey) {
-            //mainCam.enabled = false;
-            //endSequenceCam.enabled = true;
+            mainCam.enabled = false;
+            endSequenceCam.enabled = true;
             chestAnimator.SetBool("hasFullKey", true);
         }
         if (other.gameObject.tag == "Player" && keyTracker._numberOfKeys == numberOfKeysNeeded && keyTracker._hasSpecialKey) {
             //mainCam.enabled = false;
-            //endSequenceCam.enabled = true;
+            endSequenceCam.enabled = true;
             chestAnimator.SetBool("hasSpecialKey", true);
         }
     }

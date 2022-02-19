@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1840098717}
   - component: {fileID: 1840098716}
   m_Layer: 0
-  m_Name: KeyShard
-  m_TagString: Key
+  m_Name: EmptyKeyShard
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
