@@ -78,10 +78,11 @@ public class BasicPlayerController : MonoBehaviour
 
         CameraRoot.transform.rotation = Quaternion.Euler(_targetRotationV, _targetRotationH, 0.0f);
         //Check for Environement Collision
-
+        int layerMask = 1 << 6;
+        layerMask = ~layerMask;
         RaycastHit hit;
         Vector3 dir = MainCamera.transform.position - CameraRoot.transform.position;
-        bool collided = Physics.Raycast(CameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance);
+        bool collided = Physics.Raycast(CameraRoot.transform.position, dir.normalized, out hit, _maxCameraDistance, layerMask);
         if (collided && hit.collider.name != "PlayerCharacter")
         {
             MainCamera.transform.localPosition = CameraRoot.transform.InverseTransformPoint(hit.point);
