@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9156654549442288565}
   - component: {fileID: 9156654549442288569}
   - component: {fileID: 9156654549442288570}
+  - component: {fileID: 6914093031123271452}
   - component: {fileID: 9156654549442288571}
   - component: {fileID: 9156654549442288564}
   m_Layer: 0
@@ -85,6 +86,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &6914093031123271452
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156654549442288566}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!135 &9156654549442288571
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -110,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9def76de013aa49865b370f1540fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 6914093031123271452}
   player: {fileID: 0}
+  centerPoint: {fileID: 0}
   speed: 2
   minDistance: 10

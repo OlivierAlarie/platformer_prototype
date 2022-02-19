@@ -149,6 +149,8 @@ public class BasicPlayerController : MonoBehaviour
     void MovePlayer()
     {
         Vector3 newDirection = Vector3.zero;
+
+        //Check if being knockbacked
         if (_knockBackCounter <= 0)
         {
             newDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
@@ -233,21 +235,13 @@ public class BasicPlayerController : MonoBehaviour
 
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider.name == "PhysicCube")
-        {
-            KnockBack(hit.normal);
-        }
-    }
-
-    public void KnockBack(Vector3 knockBackDirection)
+    public void KnockBack(Vector3 knockBackDirection, float knockBackDuration = 0.5f, float knockBackForce = 10f)
     {
         if(_knockBackCounter <= 0)
         {
             _targetDirection = knockBackDirection;
-            _knockBackCounter = 0.5f;
-            _targetVelocityXZ = 10f;
+            _knockBackCounter = knockBackDuration;
+            _targetVelocityXZ = knockBackForce;
         }
     }
 

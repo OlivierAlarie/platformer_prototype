@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Wraith : MonoBehaviour
 {
-    [SerializeField] public GameObject player;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] public BasicPlayerController player;
     [SerializeField] public GameObject centerPoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minDistance = 10f;
@@ -21,19 +22,28 @@ public class Wraith : MonoBehaviour
 
         //moves towards player
         if (distance <= minDistance) {
-            _direction = transform.position - playerPos;
+            _direction = playerPos - rb.position;
             _direction = _direction.normalized;
-            transform.position -= _direction * speed * Time.deltaTime;
+            rb.velocity = _direction * speed;
         } 
         //returns to origin point
         if (distance > minDistance) {
-            _direction = transform.position - centerPoint.transform.position;
+            _direction = centerPoint.transform.position - rb.position;
             _direction = _direction.normalized;
-            transform.position -= _direction * speed * Time.deltaTime;
+            rb.velocity = _direction * speed;
             float distanceWraithToCenter = Vector3.Distance(transform.position, centerPoint.transform.position);
             if (distanceWraithToCenter < 0.1f) {
-                transform.position = centerPoint.transform.position;
+                rb.velocity = Vector3.zero;
             }
         }
     }
+    private void OnCollisionStay(Collision collision)
+    {
+
+        if (collision.gameObject.name == "PlayerCharacter")
+        {
+            player.KnockBack(-1 * collision.GetContact(0).normal);
+        }
+    }
+
 }
