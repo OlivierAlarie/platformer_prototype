@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587573675232154387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,6 +152,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9156654549442288566, guid: 7a777198f1086c4418fd51c9000b7c18, type: 3}
   m_PrefabInstance: {fileID: 1587573675730554101}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &3611688789665131363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573586814113847107}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9100971, y: 1.4206712, z: 3.5538979}
+  m_Center: {x: -0.025923729, y: 0.07876956, z: 1.7769488}
 --- !u!82 &2940085029795994642
 AudioSource:
   m_ObjectHideFlags: 0
@@ -301,16 +314,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 0
---- !u!65 &3611688789665131363
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573586814113847107}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9100971, y: 1.4206712, z: 3.5538979}
-  m_Center: {x: -0.025923729, y: 0.07876956, z: 1.7769488}

@@ -40,6 +40,10 @@ public class SwitchWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_timeLeft > 10f)
+        {
+            _timeLeft = 10f;
+        }
         if (Input.GetButtonDown("SwitchWorld") && _isInNormalWorld) {
             _isInDarkWorld = true;
             _isInNormalWorld = false;
