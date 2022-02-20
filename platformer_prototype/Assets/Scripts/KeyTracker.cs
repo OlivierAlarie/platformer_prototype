@@ -24,13 +24,17 @@ public class KeyTracker : MonoBehaviour
       
         }
         if (other.gameObject.tag == "SpecialKey") {
+            other.gameObject.GetComponent<AudioSource>().Play();
+            other.enabled = false;
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             _hasSpecialKey = true;
-            Destroy(other.gameObject);
+            Destroy(other.gameObject, 1f);
         }
         if (other.gameObject.tag == "Rubis") {
             numberOfRubis++;
             other.gameObject.GetComponent<AudioSource>().Play();
             other.enabled = false;
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             Destroy(other.gameObject, 1f);
         }
 

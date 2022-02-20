@@ -10,6 +10,9 @@ public class CollectibleManager : MonoBehaviour
     public TextMeshProUGUI keyShardCount;
     public GameObject specialKeyShardImage;
     public KeyTracker keyTracker;
+    
+
+    
 
     void Update()
     {
