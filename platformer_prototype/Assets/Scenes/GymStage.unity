@@ -1718,6 +1718,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 705507994}
     - target: {fileID: 2132690354, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: darkSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d5d8742a6ae0054a956fbbefac79e2c, type: 2}
+    - target: {fileID: 2132690354, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
+      propertyPath: normalSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: dfc5669af82debc45999cf57a9404039, type: 2}
+    - target: {fileID: 2132690354, guid: 94eed3dbfd9001840838006eb661ab8d, type: 3}
       propertyPath: DarkWorldStuff
       value: 
       objectReference: {fileID: 584748995}
@@ -6528,38 +6536,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1163361727
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1163361728}
-  m_Layer: 0
-  m_Name: CamPlaceHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1163361728
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163361727}
-  m_LocalRotation: {x: 0.09372867, y: 0.70375717, z: -0.09450658, w: 0.6978605}
-  m_LocalPosition: {x: 20.040512, y: 2.5714874, z: -2.8812084}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1629822374}
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1169957046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8907,90 +8883,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1629822373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1629822374}
-  - component: {fileID: 1629822376}
-  - component: {fileID: 1629822375}
-  m_Layer: 0
-  m_Name: EndSceneCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1629822374
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629822373}
-  m_LocalRotation: {x: 0.000000022351742, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1163361728}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1629822375
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629822373}
-  m_Enabled: 1
---- !u!20 &1629822376
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629822373}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!1 &1640805951
 GameObject:
   m_ObjectHideFlags: 0
@@ -9703,7 +9595,7 @@ Transform:
   - {fileID: 569579082}
   - {fileID: 280528291}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1779327856 stripped
 Transform:
@@ -11235,7 +11127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1587573676651073262, guid: 1a7a39b233bbd044f8d74177086d0940, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1587573676651073262, guid: 1a7a39b233bbd044f8d74177086d0940, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11359,6 +11251,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 504964905, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6370292672409783498, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
       propertyPath: m_Name
       value: EndingSequence
@@ -11369,7 +11265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370292672409783499, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.61
+      value: -1.97
       objectReference: {fileID: 0}
     - target: {fileID: 6370292672409783499, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11418,7 +11314,7 @@ PrefabInstance:
     - target: {fileID: 6370292672565617386, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
       propertyPath: endSequenceCam
       value: 
-      objectReference: {fileID: 1629822376}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd26178fccc75d42a207be9dd78efea, type: 3}
 --- !u!1001 &8083499553446579300

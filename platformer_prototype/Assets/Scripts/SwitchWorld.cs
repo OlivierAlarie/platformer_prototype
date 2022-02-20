@@ -11,6 +11,8 @@ public class SwitchWorld : MonoBehaviour
 
     [SerializeField] public GameObject DarkWorldStuff;
     [SerializeField] public GameObject NormalWorldStuff;
+    //public Material normalSkybox;
+    //public Material darkSkybox;
 
     [SerializeField] public Light mainLight;
 
@@ -75,11 +77,13 @@ public class SwitchWorld : MonoBehaviour
         DarkWorldStuff.SetActive(true);
         NormalWorldStuff.SetActive(false);
         mainLight.color = Color.black;
+        //RenderSettings.skybox = darkSkybox;
         //put on top of hierachy and deparent and then reactivate
     }
     private void NormalWorld() {
         NormalWorldStuff.SetActive(true);
         DarkWorldStuff.SetActive(false);
         mainLight.color = Color.white;
+        //RenderSettings.skybox = normalSkybox;
     }
 }
