@@ -6,6 +6,7 @@ public class Orb : MonoBehaviour
 {
     [SerializeField] private float _addTimeValue = 2f;
     public SwitchWorld _switchWorld;
+   
 
     private void Awake() {
         if (_switchWorld == null) {
@@ -18,7 +19,8 @@ public class Orb : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
             _switchWorld._timeLeft += _addTimeValue;
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            Destroy(this.gameObject,2f);
         }
     }
 }

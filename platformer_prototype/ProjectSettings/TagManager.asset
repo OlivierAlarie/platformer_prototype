@@ -12,6 +12,7 @@ TagManager:
   - MovingPlatform
   - GameManager
   - Rubis
+  - Orb
   layers:
   - Default
   - TransparentFX

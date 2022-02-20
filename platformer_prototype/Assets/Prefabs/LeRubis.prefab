@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2497782554275813188}
   - component: {fileID: 2497782554275813191}
   - component: {fileID: 2497782554275813190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeRubis
   m_TagString: Rubis
   m_Icon: {fileID: 0}
@@ -157,6 +157,10 @@ PrefabInstance:
     - target: {fileID: 8905933144870979251, guid: 4267d77bb8f9a8c41b3955427f51bff5, type: 3}
       propertyPath: m_Name
       value: Rubis
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905933144870979251, guid: 4267d77bb8f9a8c41b3955427f51bff5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8905933144870979251, guid: 4267d77bb8f9a8c41b3955427f51bff5, type: 3}
       propertyPath: m_TagString
