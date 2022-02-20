@@ -28,7 +28,10 @@ public class BasicPlayerController : MonoBehaviour
     public float JumpLeniency = 0.15f; // Seconds of leniency where a jump attempt is registered before reaching the ground / after leaving the ground without jumping
     public float Gravity = -9.81f;
     public float MaxFallHeight = 25; //If the character falls MaxFallHeight units on the y axis between 2 grounded checks, he dies
-    public Transform LastCheckpoint; 
+    public Transform LastCheckpoint;
+
+    public AudioSource _jumpSound;
+    public AudioSource _landingSound;
 
     [Header("Model")]
     public Transform RootGeometry;
@@ -40,6 +43,7 @@ public class BasicPlayerController : MonoBehaviour
     private float _targetSpeed = 0f;
     private float _terminalVelocityY = -53f;
     private bool _playerJumping = false;
+    private bool _playerFalling = false;
     private float _playerJumpTimer = 0f;
     private float _playerCoyoteTimer = 0f;
     private float _lastHeight = 0f;
@@ -99,8 +103,14 @@ public class BasicPlayerController : MonoBehaviour
         {
             _targetVelocityY = 0;
             _playerJumping = false;
+            if (_playerFalling)
+            {
+                _landingSound.Play();
+                _playerFalling = false;
+            }
             if (Input.GetButtonDown("Jump") || _playerJumpTimer > 0)
             {
+                _jumpSound.Play();
                 _targetVelocityY = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 _playerJumping = true;
             }
@@ -110,7 +120,6 @@ public class BasicPlayerController : MonoBehaviour
         }
         else
         {
-
             //Coyote Time
             //Early jump stop
             if (Input.GetButtonUp("Jump") && _playerJumping && _targetVelocityY > 0)
@@ -124,6 +133,7 @@ public class BasicPlayerController : MonoBehaviour
                 if (_playerCoyoteTimer > 0)
                 {
                     _targetVelocityY = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    _jumpSound.Play();
                     _playerJumping = true;
                 }
                 else
@@ -202,6 +212,7 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (_characterController.isGrounded)
         {
+            _targetVelocityY = 0;
             _characterAnimator.SetBool("isJumping", false);
             if (_targetVelocityXZ <= 0)
             {
@@ -224,13 +235,9 @@ public class BasicPlayerController : MonoBehaviour
             _characterAnimator.SetBool("isJumping", true);
         }
 
-        if(_targetVelocityY <= -1)
+        if(_targetVelocityY <= -7)
         {
-            _characterAnimator.SetBool("isFalling", true);
-        }
-        else
-        {
-            _characterAnimator.SetBool("isFalling", false);
+            _playerFalling = true;
         }
 
     }
