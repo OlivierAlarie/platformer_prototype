@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42345214, y: 0.95567226, z: 0.3491692}
-  m_Center: {x: -0.0014694929, y: 0.022163868, z: 0.004071921}
+  m_Size: {x: 0.57430196, y: 1.3073785, z: 0.53675115}
+  m_Center: {x: 0.007543966, y: 0.19801736, z: 0.013223529}
 --- !u!82 &2497782554275813190
 AudioSource:
   m_ObjectHideFlags: 0
@@ -150,6 +150,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2497782554275813188}
     m_Modifications:
+    - target: {fileID: 7635678674963940424, guid: 4267d77bb8f9a8c41b3955427f51bff5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8905933144870979251, guid: 4267d77bb8f9a8c41b3955427f51bff5, type: 3}
       propertyPath: m_Name
       value: Rubis
