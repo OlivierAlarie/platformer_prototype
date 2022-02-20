@@ -24,6 +24,7 @@ public class ChestOpenSequence : MonoBehaviour
             chestsound.Play();
             mainCam.transform.parent = newParent.transform;
             mainCam.transform.localPosition = Vector3.zero;
+            mainCam.transform.localRotation = Quaternion.identity;
             player.SetActive(false);
         }
         if (other.gameObject.tag == "Player" && keyTracker._numberOfKeys == numberOfKeysNeeded && keyTracker._hasSpecialKey) {
@@ -32,6 +33,7 @@ public class ChestOpenSequence : MonoBehaviour
             chestsound.Play();
             mainCam.transform.parent = newParent.transform;
             mainCam.transform.localPosition = Vector3.zero;
+            mainCam.transform.localRotation = Quaternion.identity;
             player.SetActive(false);
         }
     }
