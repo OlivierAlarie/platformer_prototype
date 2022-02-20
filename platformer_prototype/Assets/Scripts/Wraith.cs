@@ -22,6 +22,11 @@ public class Wraith : MonoBehaviour
 
         //moves towards player
         if (distance <= minDistance) {
+            if (!GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Play();
+            }
+            transform.LookAt(playerPos);
             _direction = playerPos - rb.position;
             _direction = _direction.normalized;
             rb.velocity = _direction * speed;
@@ -31,6 +36,7 @@ public class Wraith : MonoBehaviour
             _direction = centerPoint.transform.position - rb.position;
             _direction = _direction.normalized;
             rb.velocity = _direction * speed;
+            transform.LookAt(centerPoint.transform.position);
             float distanceWraithToCenter = Vector3.Distance(transform.position, centerPoint.transform.position);
             if (distanceWraithToCenter < 0.1f) {
                 rb.velocity = Vector3.zero;

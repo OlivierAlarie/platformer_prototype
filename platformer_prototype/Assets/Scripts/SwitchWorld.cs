@@ -8,6 +8,11 @@ public class SwitchWorld : MonoBehaviour
     //[SerializeField] private bool _isSwitchingWorld = true;
     [SerializeField] public bool _isInNormalWorld;
     [SerializeField] public bool _isInDarkWorld;
+    //music
+    [SerializeField] public AudioSource _normalmusic;
+    [SerializeField] public AudioSource _darkmusic;
+    private float musicmuted = 0f;
+    private float musicnotmuted = 0.3f;
 
     [SerializeField] public GameObject DarkWorldStuff;
     [SerializeField] public GameObject NormalWorldStuff;
@@ -77,6 +82,8 @@ public class SwitchWorld : MonoBehaviour
         DarkWorldStuff.SetActive(true);
         NormalWorldStuff.SetActive(false);
         mainLight.color = Color.black;
+        _normalmusic.volume = musicmuted;
+        _darkmusic.volume = musicnotmuted;
         //RenderSettings.skybox = darkSkybox;
         //put on top of hierachy and deparent and then reactivate
     }
@@ -84,6 +91,8 @@ public class SwitchWorld : MonoBehaviour
         NormalWorldStuff.SetActive(true);
         DarkWorldStuff.SetActive(false);
         mainLight.color = Color.white;
+        _normalmusic.volume = musicnotmuted;
+        _darkmusic.volume = musicmuted;
         //RenderSettings.skybox = normalSkybox;
     }
 }

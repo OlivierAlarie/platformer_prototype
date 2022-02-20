@@ -8,10 +8,20 @@ public class KeyTracker : MonoBehaviour
     [SerializeField] public int _numberOfKeys = 0;
     [SerializeField] public int numberOfRubis = 0;
 
-    private void OnTriggerEnter(Collider other) {
+
+    private void OnTriggerEnter(Collider other) 
+    {
+
         if (other.gameObject.tag == "Key") {
             _numberOfKeys++;
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<AudioSource>().Play();
+            //  otherobject = GetComponent<AudioSource>();
+            //  otherobject.Play();
+            other.enabled = false;
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            other.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            Destroy(other.gameObject, 2f);
+      
         }
         if (other.gameObject.tag == "SpecialKey") {
             _hasSpecialKey = true;
@@ -19,7 +29,9 @@ public class KeyTracker : MonoBehaviour
         }
         if (other.gameObject.tag == "Rubis") {
             numberOfRubis++;
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<AudioSource>().Play();
+            other.enabled = false;
+            Destroy(other.gameObject, 1f);
         }
 
     }

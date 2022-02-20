@@ -10,6 +10,7 @@ public class ChestOpenSequence : MonoBehaviour
     public float numberOfKeysNeeded = 4f;
     public GameObject timerBar;
     public GameObject player;
+    public AudioSource chestsound;
 
     [Header("Cameras")]
     public GameObject mainCam;
@@ -20,6 +21,7 @@ public class ChestOpenSequence : MonoBehaviour
         if (other.gameObject.tag == "Player" && keyTracker._numberOfKeys == numberOfKeysNeeded && !keyTracker._hasSpecialKey) {
             chestAnimator.SetBool("hasFullKey", true);
             timerBar.SetActive(false);
+            chestsound.Play();
             mainCam.transform.parent = newParent.transform;
             mainCam.transform.localPosition = Vector3.zero;
             player.SetActive(false);
@@ -27,6 +29,7 @@ public class ChestOpenSequence : MonoBehaviour
         if (other.gameObject.tag == "Player" && keyTracker._numberOfKeys == numberOfKeysNeeded && keyTracker._hasSpecialKey) {
             chestAnimator.SetBool("hasSpecialKey", true);
             timerBar.SetActive(false);
+            chestsound.Play();
             mainCam.transform.parent = newParent.transform;
             mainCam.transform.localPosition = Vector3.zero;
             player.SetActive(false);
