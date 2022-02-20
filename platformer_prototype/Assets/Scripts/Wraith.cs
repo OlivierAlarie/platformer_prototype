@@ -9,10 +9,19 @@ public class Wraith : MonoBehaviour
     [SerializeField] public GameObject centerPoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minDistance = 10f;
+    [SerializeField] private float knockBackDuration = 1f;
+    [SerializeField] private float knockBackForce = 25f;
 
     private Vector3 _direction;
 
+    private void Start()
+    {
 
+        if (player == null)
+        {
+            player = FindObjectOfType<BasicPlayerController>();
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -35,11 +44,15 @@ public class Wraith : MonoBehaviour
         if (distance > minDistance) {
             _direction = centerPoint.transform.position - rb.position;
             _direction = _direction.normalized;
-            rb.velocity = _direction * speed;
-            transform.LookAt(centerPoint.transform.position);
             float distanceWraithToCenter = Vector3.Distance(transform.position, centerPoint.transform.position);
             if (distanceWraithToCenter < 0.1f) {
                 rb.velocity = Vector3.zero;
+                transform.rotation = Quaternion.Euler(-90,0,0);
+            }
+            else
+            {
+                rb.velocity = _direction * speed;
+                transform.LookAt(centerPoint.transform.position);
             }
         }
     }
@@ -48,7 +61,7 @@ public class Wraith : MonoBehaviour
 
         if (collision.gameObject.name == "PlayerCharacter")
         {
-            player.KnockBack(-1 * collision.GetContact(0).normal, 1f, 25f);
+            player.KnockBack(-1 * collision.GetContact(0).normal, knockBackDuration, knockBackForce);
         }
     }
 
