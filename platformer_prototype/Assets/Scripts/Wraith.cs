@@ -22,6 +22,7 @@ public class Wraith : MonoBehaviour
             player = FindObjectOfType<BasicPlayerController>();
         }
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -45,7 +46,7 @@ public class Wraith : MonoBehaviour
             _direction = centerPoint.transform.position - rb.position;
             _direction = _direction.normalized;
             float distanceWraithToCenter = Vector3.Distance(transform.position, centerPoint.transform.position);
-            if (distanceWraithToCenter < 0.1f) {
+            if (distanceWraithToCenter <= 0.1f) {
                 rb.velocity = Vector3.zero;
                 transform.rotation = Quaternion.Euler(-90,0,0);
             }
