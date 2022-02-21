@@ -40,45 +40,54 @@ public class SwitchWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_timeLeft > 10f)
+        if (Time.timeScale != 0)
         {
-            _timeLeft = 10f;
-        }
-        if (Input.GetButtonDown("SwitchWorld") && _isInNormalWorld) {
-            _isInDarkWorld = true;
-            _isInNormalWorld = false;
+            if (_timeLeft > 10f)
+            {
+                _timeLeft = 10f;
             }
-        else if (Input.GetButtonDown("SwitchWorld") && _isInDarkWorld) {
-            _isInNormalWorld = true;
-            _isInDarkWorld = false;
+            if (Input.GetButtonDown("SwitchWorld") && _isInNormalWorld)
+            {
+                _isInDarkWorld = true;
+                _isInNormalWorld = false;
             }
-        if (_isInDarkWorld) {
-            DarkWorld();
-            if (_timeLeft > 0) {
-                _timeLeft -= Time.deltaTime;
-                _timerBar.fillAmount = _timeLeft / maxTime;
-            }
-            if (_timeLeft <= 0) {
+            else if (Input.GetButtonDown("SwitchWorld") && _isInDarkWorld)
+            {
                 _isInNormalWorld = true;
                 _isInDarkWorld = false;
             }
-            _timerBar.enabled = true;
-        }
-        if (_isInNormalWorld) {
-            NormalWorld();
-            if (_timeLeft < maxTime) {
-                _timeLeft += refreshRate * Time.deltaTime;
-                _timerBar.fillAmount = _timeLeft / maxTime;
-            }
-            if (_timeLeft >= maxTime)
+            if (_isInDarkWorld)
             {
-                _timerBar.enabled = false;
-            }
-            else
-            {
+                DarkWorld();
+                if (_timeLeft > 0)
+                {
+                    _timeLeft -= Time.deltaTime;
+                    _timerBar.fillAmount = _timeLeft / maxTime;
+                }
+                if (_timeLeft <= 0)
+                {
+                    _isInNormalWorld = true;
+                    _isInDarkWorld = false;
+                }
                 _timerBar.enabled = true;
             }
-
+            if (_isInNormalWorld)
+            {
+                NormalWorld();
+                if (_timeLeft < maxTime)
+                {
+                    _timeLeft += refreshRate * Time.deltaTime;
+                    _timerBar.fillAmount = _timeLeft / maxTime;
+                }
+                if (_timeLeft >= maxTime)
+                {
+                    _timerBar.enabled = false;
+                }
+                else
+                {
+                    _timerBar.enabled = true;
+                }
+            }
         }
     }
 

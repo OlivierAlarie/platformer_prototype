@@ -9,8 +9,8 @@ public class Wraith : MonoBehaviour
     [SerializeField] public GameObject centerPoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minDistance = 10f;
-    [SerializeField] private float knockBackDuration = 1f;
-    [SerializeField] private float knockBackForce = 25f;
+    [SerializeField] public float knockBackDuration = 1f;
+    [SerializeField] public float knockBackForce = 25f;
 
     private Vector3 _direction;
 

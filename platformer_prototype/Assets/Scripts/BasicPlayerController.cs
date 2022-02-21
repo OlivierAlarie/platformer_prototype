@@ -65,10 +65,13 @@ public class BasicPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CameraCheck();
-        JumpAndGravityCheck();
-        MovePlayer();
-        AnimatePlayer();
+        if (Time.timeScale != 0)
+        {
+            CameraCheck();
+            JumpAndGravityCheck();
+            MovePlayer();
+            AnimatePlayer();
+        }
     }
 
     void CameraCheck()
@@ -242,6 +245,15 @@ public class BasicPlayerController : MonoBehaviour
 
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        GameObject gameO = hit.collider.gameObject;
+        if (gameO.tag == "Wraith")
+        {
+            KnockBack(hit.normal, gameO.GetComponent<Wraith>().knockBackDuration, gameO.GetComponent<Wraith>().knockBackForce);
+        }
+    }
+
     public void KnockBack(Vector3 knockBackDirection, float knockBackDuration = 0.5f, float knockBackForce = 10f)
     {
         if(_knockBackCounter <= 0)
@@ -250,21 +262,5 @@ public class BasicPlayerController : MonoBehaviour
             _knockBackCounter = knockBackDuration;
             _targetVelocityXZ = knockBackForce;
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        GameObject _gameObject = other.gameObject;
-
-        switch (_gameObject.tag)
-        {
-            case "MovingPlatform":
-                transform.parent = other.transform;
-                break;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        transform.parent = null;
     }
 }
